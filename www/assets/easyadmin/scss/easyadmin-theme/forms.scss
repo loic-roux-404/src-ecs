@@ -18,10 +18,9 @@
     align-self: self-start;
     color: var(--text-color);
     flex: 30% 0 0;
-    font-size: var(--font-size-lg);
-    font-weight: 500;
-    margin: 5px 5px 0 0;
-    text-align: left;
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    margin: 6px 4px;
 }
 .form-group .col-form-label {
     padding: 0;
@@ -96,6 +95,7 @@
 // Checkbox widgets
 .field-checkbox .form-widget,
 .form-group.field-collection-action {
+    margin-left: calc(30% + 5px);
     margin-bottom: 0;
     margin-top: 0;
 }

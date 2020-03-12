@@ -196,17 +196,17 @@
                                             <table class="table datagrid mb-2 p-2">
                                                 <thead>
                                                 <tr>
-                                                    <th><a href="#">Commande</a></th>
-                                                    <th><a href="#">Date</a></th>
+                                                    <th><a href="#">Acheteur</a></th>
+                                                    <th><a href="#">Date de la commande</a></th>
                                                     <th><a href="#">Total</a></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 {% for purchase in lastPurchases %}
                                                     <tr>
-                                                        <td class="string">{{ purchase.trackingNumber }}</td>
+                                                        <td class="string">{{ purchase.buyer }}</td>
                                                         <td class="integer">{{ purchase.createdAt|date("d/m/Y") }}</td>
-                                                        <td class="integer"></td>
+                                                        <td class="integer">{{ purchase.total }}</td>
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>

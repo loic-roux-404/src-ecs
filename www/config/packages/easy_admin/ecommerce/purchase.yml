@@ -17,7 +17,7 @@ easy_admin:
                 sort: ['createdAt', 'DESC']
                 title: 'Ventes'
                 actions: [ { name: 'show', icon: 'shopping-basket' } ]
-                fields: ['guid', 'buyer', 'deliveryDate', 'deliveryHour', 'billingAddress', 'purchasedItems', 'total']
+                fields: ['guid', 'buyer', 'deliveryDate', 'deliveryHour', 'purchasedItems', 'total']
             form:
                 fields:
                     - { type: 'group', label: 'Delivery Details', icon: 'truck', css_class: 'col-sm-6' }
