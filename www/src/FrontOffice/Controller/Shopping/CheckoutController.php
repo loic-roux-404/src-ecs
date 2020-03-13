@@ -43,9 +43,9 @@ class CheckoutController extends AbstractController
         $addresses = $addressRepository->findBy(['user' => $this->getUser()]);
         
         if (!$addresses){
-            $this->addFlash('info', 'Veuillez renseigner une adresse de livraison avant de continuer');
             $this->session->set('checkout/current-checkout', true);
-            
+            $this->addFlash('danger', 'Veuillez renseigner une adresse de livraison avant de continuer');
+    
             return $this->render('front_office/shopping/checkout/address.html.twig', [
                'address_form' => $this->createForm(AddressType::class)->createView(),
             ]);
@@ -146,6 +146,7 @@ class CheckoutController extends AbstractController
             return $this->redirectToRoute('basket');
         }
         
+        $this->session->remove('checkout/summary');
         $this->session->set('checkout/payment', true);
 
         return $this->render('front_office/shopping/checkout/payment.html.twig', [

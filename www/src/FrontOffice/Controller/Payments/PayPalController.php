@@ -15,7 +15,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -50,12 +50,13 @@ class PayPalController extends AbstractController
      * Generates the payment and redirects to the paypal checkout page
      *
      * @Route("checkout/paypal", name="checkoutPaypal")
+     * @IsGranted("ROLE_USER")
      * @param Request $req
      * @return Response
      */
     public function paypalCheckout(Request $req)
     {
-        if (!$this->session->get('checkout/payment')) {
+        if (false == $this->session->get('checkout/payment')) {
             return $this->redirectToRoute('basket');
         }
         
@@ -90,6 +91,7 @@ class PayPalController extends AbstractController
      * Actually executes the payment after the customer was redirected back from paypal
      *
      * @Route("checkout/paypal-payment",name="paypalPayment")
+     * @IsGranted("ROLE_USER")
      * @param Request $req
      * @param MailerService $mailer
      * @param PurchasefactoryService $orderFactory
@@ -100,7 +102,7 @@ class PayPalController extends AbstractController
        MailerService $mailer,
        PurchaseFactoryService $purchaseFactory
     ) {
-        if (!$this->session->get('checkout/paypal-checkout')) {
+        if (false == $this->session->get('checkout/paypal-checkout')) {
             return $this->redirectToRoute('basket');
         }
         
@@ -140,6 +142,8 @@ class PayPalController extends AbstractController
         }
 
         $this->basket->clear();
+        $this->session->set('checkout/paypal-checkout', false);
+        $this->session->set('checkout/payment', false);
         
         return $this->render(
            'front_office/shopping/purchaseConfirmation.html.twig'

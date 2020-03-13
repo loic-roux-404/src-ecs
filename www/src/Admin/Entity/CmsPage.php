@@ -27,11 +27,7 @@ class CmsPage extends AbstractSluggable
     use CoreEn\Traits\DatesAt;
     use CoreEn\Traits\IsActive;
     use CoreEn\Traits\ImageCollection;
-    
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $body;
+    use CoreEn\Traits\TitleContents;
     
     /**
      * @ORM\ManyToOne(targetEntity="Core\Entity\Admin")
@@ -85,31 +81,23 @@ class CmsPage extends AbstractSluggable
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Admin\Entity\TitleContent", mappedBy="cmsPage")
-     */
-    private $titleContents;
     
     public function __construct()
     {
         if (method_exists($this, '_init')) {
             $this->_init();
         }
+    
+        if (method_exists($this, '_initTitleContents')) {
+            $this->_initTitleContents();
+        }
+    
+        if (method_exists($this, '_initImages')) {
+            $this->_initImages();
+        }
         
        $this->category = new ArrayCollection();
        $this->titleContents = new ArrayCollection();
-    }
-    
-    public function getBody(): ?string
-    {
-        return $this->body;
-    }
-    
-    public function setBody(string $body): self
-    {
-        $this->body = $body;
-        return $this;
     }
     
     public function getAuthor(): ?CoreEn\Admin
@@ -181,11 +169,6 @@ class CmsPage extends AbstractSluggable
         $this->category->removeElement($category);
         $category->addItem($this);
     }
-    
-    public function __toString(): string
-    {
-        return (string) $this->getName();
-    }
 
     public function getLayout(): ?string
     {
@@ -222,32 +205,9 @@ class CmsPage extends AbstractSluggable
 
         return $this;
     }
-
-    /**
-     * @return Collection|TitleContent[]
-     */
-    public function getTitleContents(): Collection
+    
+    public function __toString(): string
     {
-        return $this->titleContents;
-    }
-
-    public function addTitleContent(TitleContent $titleContent): self
-    {
-        if (!$this->titleContents->contains($titleContent)) {
-            $this->titleContents[] = $titleContent;
-            $titleContent->addCmsPage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTitleContent(TitleContent $titleContent): self
-    {
-        if ($this->titleContents->contains($titleContent)) {
-            $this->titleContents->removeElement($titleContent);
-            $titleContent->removeCmsPage($this);
-        }
-
-        return $this;
+        return (string) $this->getName();
     }
 }
