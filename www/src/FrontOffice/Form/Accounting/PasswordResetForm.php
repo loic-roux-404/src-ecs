@@ -14,7 +14,10 @@ class PasswordResetForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('password', RepeatedType::class, [
+            ->add(
+                'password',
+                RepeatedType::class,
+                [
                 'type' => PasswordType::class,
                 'required' => true,
                 'first_name' => 'first',
@@ -27,7 +30,7 @@ class PasswordResetForm extends AbstractType
                     'attr' => ['placeholder' => 'Powtórz hasło', 'class' => 'form-control-lg'],
                     'constraints' => [new NotBlank(), new Length(['min' => 8])]
                 ]
-            ])
-        ;
+                ]
+            );
     }
 }

@@ -29,7 +29,7 @@ class Purchase
     /**
      * The Unique id of the purchase.
      *
-     * @var string
+     * @var                     string
      * @ORM\Column(type="guid")
      */
     protected $guid = null;
@@ -37,7 +37,7 @@ class Purchase
     /**
      * The date of the delivery (it doesn't include the time).
      *
-     * @var \DateTime
+     * @var                     \DateTime
      * @ORM\Column(type="date")
      */
     protected $deliveryDate = null;
@@ -45,7 +45,7 @@ class Purchase
     /**
      * The shipping information.
      *
-     * @var Shipment
+     * @var                       Shipment
      * @ORM\Column(type="object")
      */
     protected $shipping = null;
@@ -53,7 +53,7 @@ class Purchase
     /**
      * The customer preferred time of the day for the delivery.
      *
-     * @var \DateTime|null
+     * @var                     \DateTime|null
      * @ORM\Column(type="time", nullable=true)
      */
     protected $deliveryHour = null;
@@ -61,7 +61,7 @@ class Purchase
     /**
      * The customer shipping address.
      *
-     * @var string
+     * @var                                              string
      * @ORM\OneToOne(targetEntity="Core\Entity\Address", mappedBy="purchaseShipping", cascade={"persist"})
      */
     private $shippingAddress;
@@ -69,7 +69,7 @@ class Purchase
     /**
      * The user who made the purchase.
      *
-     * @var \Core\Entity\User
+     * @var                                            \Core\Entity\User
      * @ORM\ManyToOne(targetEntity="Core\Entity\User", inversedBy="purchases", cascade={"persist"})
      */
     private $buyer;
@@ -149,24 +149,31 @@ class Purchase
      */
     public function setPurchasedItems($purchasedItems)
     {
-        $this->purchasedItems = $purchasedItems;
+        foreach ($purchasedItems as $item) {
+            $this->addPurchasedItem($item);
+        }
     }
     
     /**
      * @param PurchaseItem $purchasedItems
      */
-    public function addPurchasedItem($purchasedItem)
+    public function addPurchasedItem(PurchaseItem $purchasedItem)
     {
-        $this->purchasedItems[] = $purchasedItem;
+
+        if ($this->purchasedItems->contains($purchasedItem)) {
+            return;
+        }
+        $this->purchasedItems->add($purchasedItem);
+        $purchasedItem->setPurchase($this);
     }
     
-    public function removePurchasedItem(PurchaseItem $product): self
+    public function removePurchasedItem(PurchaseItem $purchaseItem): self
     {
-        if ($this->purchasedItems->contains($product)) {
-            $this->purchasedItems->removeElement($product);
+        if ($this->purchasedItems->contains($purchaseItem)) {
+            $this->purchasedItems->removeElement($purchaseItem);
             // set the owning side to null (unless already changed)
-            if ($product->getPurchase() === $this) {
-                $product->setPurchase(null);
+            if ($purchaseItem->getPurchase() === $this) {
+                $purchaseItem->setPurchase(null);
             }
         }
         
@@ -239,7 +246,7 @@ class Purchase
     }
     
     /**
-     * @param mixed $trackingNumber
+     * @param  mixed $trackingNumber
      * @return Purchase
      */
     public function setTrackingNumber($trackingNumber)
@@ -259,7 +266,9 @@ class Purchase
         return preg_replace('/[^0-9]/i', '', sprintf('%d%d%03d%s', $storeId, date('Y'), date('z'), microtime()));
     }
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         return 'Purchase #'.$this->getId();
@@ -294,7 +303,7 @@ class Purchase
     }
     
     /**
-     * @param mixed $status
+     * @param  mixed $status
      * @return Purchase
      */
     public function setStatus($status)
@@ -317,18 +326,18 @@ class Purchase
     public function create(Basket $basket)
     {
         foreach ($basket->getProducts() as $product) {
-            $this->addPurchasedItem(new PurchaseItem($product));
+            $this->addPurchasedItem(new PurchaseItem($product, $basket->getQuantity($product)));
         }
     }
     
     public function getTotal()
     {
         $total = 0.0;
-
+        
         foreach ($this->getPurchasedItems() as $item) {
             $total += $item->getTotalPrice();
         }
-
+        
         return $total;
     }
 

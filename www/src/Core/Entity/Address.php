@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use FrontOffice\Entity\Purchase;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Core\Validator\Constraints\EntityNotExists;
 
 /**
  * @ORM\Entity(repositoryClass="Core\Repository\AddressRepository")
  * @ORM\Table(name="user_addresses")
- * @UniqueEntity("phoneNumber")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  */
 class Address
 {
@@ -51,9 +51,9 @@ class Address
     private $country;
     
     /**
-     * @var string
-     * @ORM\Column(name="phone_number", type="string", length=10, nullable=true, unique=true)
+     * @ORM\Column(name="phone_number", type="string", length=10, nullable=true, unique=false)
      * @Assert\NotBlank()
+     * @EntityNotExists(entityClass="Core\Entity\Address", field="phoneNumber")
      */
     private $phoneNumber;
 

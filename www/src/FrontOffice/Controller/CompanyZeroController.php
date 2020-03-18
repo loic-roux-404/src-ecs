@@ -4,7 +4,7 @@ namespace FrontOffice\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 
-class Company_ZeroController extends AbstractController
+class CompanyZeroController extends AbstractController
 {
     /**
      * @Route("/company", name="company")
@@ -22,4 +22,3 @@ class Company_ZeroController extends AbstractController
         return $this->render('front_office/zerodechet.html.twig');
     }
 }
-

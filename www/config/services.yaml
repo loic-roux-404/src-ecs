@@ -57,9 +57,6 @@ services:
     front_office.security.login_form_guard:
         class: 'FrontOffice\Security\LoginFormGuard'
 
-    Admin\Event\EasyAdminSubscriber\:
-        resource: '../src/Admin/Event/EasyAdminSubscriber.php'
-
     Admin\Repository\:
         resource: '../src/Admin/Repository/*'
         tags: ['doctrine.repository_service']
@@ -90,3 +87,9 @@ services:
         class: FrontOffice\Twig\MenuExtension
         autowire: true
         tags: ['twig.extension']
+
+    #ecs.validator.entity_not_exist:
+    #    class: 'Core\Validator\Constraints\EntityNotExistsValidator'
+    #    autowire: true
+    #    tags:
+    #        - { name: validator.constraint_validator, alias: entity_not_exist }

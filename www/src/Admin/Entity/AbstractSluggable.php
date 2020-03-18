@@ -3,7 +3,6 @@
 
 namespace Admin\Entity;
 
-
 use Core\Entity\Model\Sluggable;
 use Core\Entity\Traits\Id;
 use Core\Entity\Traits\Name;
@@ -12,9 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorColumn(name="discr",                         type="string")
  * @ORM\DiscriminatorMap({
- *     "abstract_category" = "AbstractCategory",
  *     "category_cms" = "CmsCategory",
  *     "product_category" = "ProductCategory",
  *     "product" = "Product",

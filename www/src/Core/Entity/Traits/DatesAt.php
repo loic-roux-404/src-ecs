@@ -13,13 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 trait DatesAt
 {
     /**
-     * @var \DateTime
+     * @var                           \DateTime
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     protected $createdAt = null;
     
     /**
-     * @var \DateTime
+     * @var                           \DateTime
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt = null;
@@ -62,7 +62,8 @@ trait DatesAt
     
     public function setUpdatedAt(?\DateTime $datetime)
     {
-        $this->updatedAt = $datetime ?? new \DateTime('now');;
+        $this->updatedAt = $datetime ?? new \DateTime('now');
+        ;
         
         return $this;
     }
@@ -89,7 +90,7 @@ trait DatesAt
     }
     
     /**
-     * @param mixed $deletedAt
+     * @param  mixed $deletedAt
      * @return self
      */
     public function setDeletedAt(?\DateTime $deletedAt)

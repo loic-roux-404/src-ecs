@@ -6,8 +6,6 @@ namespace Admin\Entity;
 use Core\Entity\Traits;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 
 /**
  * @ORM\Entity(repositoryClass="Admin\Repository\NavRepository")
@@ -26,7 +24,7 @@ class Nav
     private $page;
     
     /**
-     * @ORM\Column(name="position", type="integer", nullable=false, unique=true)
+     * @ORM\Column(name="position", type="integer", nullable=false)
      * @Assert\NotBlank()
      */
     private $position;

@@ -3,7 +3,6 @@
 
 namespace Admin\Command;
 
-
 use Admin\Entity\CmsPage;
 use Admin\Entity\Diy;
 use Admin\Entity\Settings;
@@ -35,7 +34,7 @@ class InitSettingsCommand extends Command
     protected function configure()
     {
         $this->setDescription('init app settings');
-        $this->addOption('fillSettings', 'f',InputOption::VALUE_OPTIONAL,'fill settings with last items.', false);
+        $this->addOption('fillSettings', 'f', InputOption::VALUE_OPTIONAL, 'fill settings with last items.', false);
     }
     
     public function execute(?InputInterface $input, ?OutputInterface $output)
@@ -62,10 +61,10 @@ class InitSettingsCommand extends Command
     protected function getLastItems($entity, $qty)
     {
         return $this->doctrine->getRepository($entity)->findBy(
-           [],
-           ['createdAt' => 'ASC'],
-           $qty,
-           0
+            [],
+            ['createdAt' => 'ASC'],
+            $qty,
+            0
         );
     }
 }

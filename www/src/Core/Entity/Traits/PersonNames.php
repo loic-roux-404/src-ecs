@@ -1,19 +1,20 @@
 <?php
 
 namespace Core\Entity\Traits;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait PersonNames
 {
     /**
-     * @var string
+     * @var                     string
      * @ORM\Column(name="name", type="string", length=32, nullable=false, unique=false)
      * @Assert\NotBlank()
      */
     private $name;
     
     /**
-     * @var string
+     * @var                          string
      * @ORM\Column(name="last_name", type="string", length=32, nullable=false, unique=false)
      * @Assert\NotBlank()
      */
