@@ -79,7 +79,7 @@ class LoadCategories extends Fixture implements OrderedFixtureInterface
             $category->setName('CmsCategory #'.$i);
             $category->setDescription($this->getRandomBody());
             
-            $this->addReference('cms-category-'.$i, $category);
+            $this->addReference('modules-category-'.$i, $category);
             $manager->persist($category);
         }
     
@@ -89,10 +89,10 @@ class LoadCategories extends Fixture implements OrderedFixtureInterface
         foreach (range(0, 4) as $i) {
             $category = new CmsCategory();
             $category->setName('CmsSubcategory #'.$i);
-            $category->setParent($this->getReference('cms-category-'.($i % 10)));
+            $category->setParent($this->getReference('modules-category-'.($i % 10)));
             $category->setDescription($this->getRandomBody());
 
-            $this->addReference('cms-subcategory-'.$i, $category);
+            $this->addReference('modules-subcategory-'.$i, $category);
             $manager->persist($category);
         }
 

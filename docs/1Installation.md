@@ -122,6 +122,13 @@ Petite amélioration de performance avec : `git config core.preloadindex true`
 #### Sur linux (debian/ubuntu)
 `apt install nfs-kernel-server nfs-common`
 
+## SMB
+- activer l'option `smb: true` dans `vm_config.yaml`
+- Vérifier si Smb est activé dans powerShell`Get-SmbServerConfiguration`
+
+Sur mac :
+> https://github.com/hashicorp/vagrant/issues/9567
+
 ## SSL
 On prévoit par la suite mettre en place un certificat autosigné (pour le cadenas)
 

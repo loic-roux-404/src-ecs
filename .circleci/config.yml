@@ -77,7 +77,7 @@ jobs:
                         - ~/.cache/yarn
 
             -   run:
-                    name: check js code style
+                    name: check scripts code style
                     command: yarn --cwd ./www/ lint || echo "yarn lint error check your code style" || true
 
             -   run:

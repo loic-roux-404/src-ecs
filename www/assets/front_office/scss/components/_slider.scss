@@ -17,7 +17,7 @@
     transform: translateY(-50%);
     width: auto;
     padding: 16px;
-    color: #2aad38;
+    color: $black;
     font-weight: bold;
     font-size: 2rem;
     transition: 0.5s ease;
@@ -27,6 +27,7 @@
   }
 
   .next {
+    color: $white;
     right: 0;
     border-radius: 3px 0 0 3px;
   }

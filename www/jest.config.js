@@ -7,23 +7,23 @@ module.exports = (space) => {
     rootDir: path.resolve(__dirname),
     runner: 'jest-runner-tsc',
     displayName: 'tsc',
-    //moduleFileExtensions: ['js', 'ts'],
-    //testMatch: ['<rootDir>/**/test/*.ts'],
+    //moduleFileExtensions: ['scripts', 'scripts'],
+    //testMatch: ['<rootDir>/**/test/*.scripts'],
     moduleNameMapper: {
       '^@/(.*)$': '<rootDir>/$1'
     },
-    "testRegex": "**/test/.*.{js,ts}$",
+    "testRegex": "**/test/.*.{scripts,scripts}$",
     transform: {
-      "\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js",
+      "\\.(ts)$": "<rootDir>/node_modules/scripts-jest/preprocessor.scripts",
     },
     testPathIgnorePatterns: [
       '<rootDir>/test/e2e'
     ],
-    setupFiles: ['<rootDir>/assets/jestEntry${space}.js'],
+    setupFiles: ['<rootDir>/assets/jestEntry${space}.scripts'],
     mapCoverage: true,
     coverageDirectory: '<rootDir>',
     collectCoverageFrom: [
-      '/**/*.{js,ts}',
+      '/**/*.{scripts,scripts}',
       '!/assets/**/app.js',
       '!**/node_modules/**'
     ]

@@ -1,0 +1,1 @@
+import '#fo/pages/modules/diy.scss';

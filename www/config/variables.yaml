@@ -16,9 +16,8 @@ parameters:
     ecs.path.blog_covers: /uploads/images/blog
 
     # templates config
-    front_end.default_path: '%kernel.project_dir%/templates'
-    front_end.fo: '%front_end.default_path%/front_office'
-    front_end.admin: '%front_end.default_path%/bundles/EasyAdminBundle'
+    front_end.fo: '%kernel.project_dir%/views/front_office'
+    front_end.admin: '%kernel.project_dir%/views/bundles/EasyAdminBundle'
 
     # webpack
     front_end.fo_build: '%kernel.project_dir%/public/front_office/build'

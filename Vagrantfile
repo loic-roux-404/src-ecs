@@ -11,9 +11,8 @@ if(!File.exist?("#{current_dir}/vm_config.yaml"))
 end
 
 yml              = YAML.load_file("#{current_dir}/vm_config.yaml")
-conf, vm, rsync_exclude         = yml['conf'], yml['vm'], yml['rsync_exclude']
+conf, vm, smb, rsync_exclude         = yml['conf'], yml['vm'], yml['smb'], yml['rsync_exclude']
 os               = conf['box'] ? conf['box'] : "loic-roux-404/deb-g4"
-
 # book repo
 playbook_name    = "playbook-#{conf['projectname']}"
 playbook         = "https://github.com/#{conf['org']}/#{playbook_name}.git"
@@ -76,13 +75,13 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   if conf['smb'] && NFS_ENABLED
-    puts 'Disable nfs or smb, two shared folder make an over use of CPU & RAM'
+    puts 'Use nfs OR smb'
     exit
   end
 
   if conf['smb'] && !debug & !NFS_ENABLED
-    config.vm.synced_folder ".", "/data/ecs", type: 'smb', smb_password: "vagrant", smb_username: "vagrant",
-    mount_options: ["username=vagrant","password=vagrant"]
+    config.vm.synced_folder ".", "/data/ecs", type: 'smb', smb_password: smb['pass'], smb_username: smb['user'],
+    mount_options: ["username=#{smb['pass']}","password=#{smb['user']}"]
   end
 
   if !debug

@@ -1,44 +1,25 @@
 # enable with nfs/ disable with rsync
 #(false | true)
 parameters:
+    manifestKey: 'public'
     poll: 200
     regenDist: false # regenerate a webpack config dist
     configs:
-        # Add pages for the differents spaces here (correspond to webpack entries)
+        # Add pages for the differents spaces here (correspond to webpack pages)
         front_office:
             build: front_office/build
             pages:
-                - homepage
-                - accounting # Regroupe tous ce qui concerne l'inscription /
-                - shopping
-                - proServiceList
-                - cmsShow
-                - cmsList
-                - diyShow
-                - diyList
-                - productList # List == category
-                - productShow
-                - company-zero
-            defaultExt: ts
+                - app
             alias: fo
 
         easyadmin:
             build: admin/build
             pages:
-                - js/app
+                - app
             alias: admin
 
-## README
-# Suivre arborescense des fichiers assets
-# La convention de nommage : sujetTypePage Attention le sujet != nom de dossier dans les assets
-# Majuscule dans le nom de fichier = /
-# =======================
-# Liste des types de page
-# List | Show | Update ...
-# On peut garder des entrées génériques comme accounting
-# =======================
-## Options of page entry setter
-# - name (config_name)
-#   pages:
-#      - entry 1 (split assets in different pages)
-#   default_ext (by default it's js but typescript is a choice)
+# TODO : create a per page config which echo in app.js new pages if not exist
+    #- idea : command to update file in package.json
+    #- use directory name with module definition for specific
+    #- use JSON object structure to create a NodeTree organisation (pages)
+    #- Keep possibility of big main entries on top of tree

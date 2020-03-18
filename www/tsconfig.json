@@ -2,17 +2,24 @@
     "compilerOptions": {
       "baseUrl": "assets",
       "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "isolatedModules": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
       "module": "es6",
       "moduleResolution": "node",
-      "noImplicitReturns": true,
       "declaration": false,
       "sourceMap": true,
       "noLib": false,
       "strict": true,
       "suppressImplicitAnyIndexErrors": true,
       "target": "es5",
+      /* Strict Type-Checking Options */
+      "noImplicitAny": false,
+      "strictFunctionTypes": true,
+      "strictPropertyInitialization": true,
+      "noImplicitThis": false,
+      "noImplicitReturns": false,
       "paths": {
         "@core": ["assets/core/*"],
         "@admin": ["assets/easyadmin/*"],
@@ -26,7 +33,8 @@
     ],
     "exclude": [
       "**/build/", 
-      "node_modules", 
+      "**/node_modules/",
+      "**/vendor/",
       "**/*.spec.ts"
     ]
   }

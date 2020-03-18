@@ -14,7 +14,7 @@ class CompanyController extends AbstractController
     {
         $content = "never do a thing like that (be generic)";
         return $this->render(
-            'front_office/cms/cmsShow.html.twig',
+            'front_office/modules/cmsShow.html.twig',
             [
               "content" => $content,
                "layout" => 'two-cols'

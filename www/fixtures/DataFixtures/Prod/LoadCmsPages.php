@@ -125,7 +125,7 @@ class LoadCmsPages extends Fixture implements OrderedFixtureInterface
         $selectedCategoryIds = array_rand($allCategoryIds, $numCategories);
 
         foreach ((array) $selectedCategoryIds as $categoryId) {
-            $categories[] = $this->getReference('cms-category-'.$categoryId);
+            $categories[] = $this->getReference('modules-category-'.$categoryId);
         }
 
         return $categories;

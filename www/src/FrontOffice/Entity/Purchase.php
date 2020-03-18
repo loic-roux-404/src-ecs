@@ -43,7 +43,7 @@ class Purchase
     protected $deliveryDate = null;
     
     /**
-     * The shipping information.
+     * The shopping information.
      *
      * @var                       Shipment
      * @ORM\Column(type="object")
@@ -59,7 +59,7 @@ class Purchase
     protected $deliveryHour = null;
     
     /**
-     * The customer shipping address.
+     * The customer shopping address.
      *
      * @var                                              string
      * @ORM\OneToOne(targetEntity="Core\Entity\Address", mappedBy="purchaseShipping", cascade={"persist"})

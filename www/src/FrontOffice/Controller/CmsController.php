@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CmsController extends AbstractController
 {
     /**
-     * @Route("/cms/{slug}",
+     * @Route("/modules/{slug}",
      *     name="cmsShow",
      *     requirements={"slug"="^[A-Za-z0-9-]*$"}
      * )
@@ -26,7 +26,7 @@ class CmsController extends AbstractController
             ->findOneBySlug($slug);
         
         return $this->render(
-            'front_office/cms/cmsPageShow.html.twig',
+            'front_office/modules/cmsPageShow.html.twig',
             [
             'cmsPage' => $cmsPage,
             'layout' => $cmsPage->getLayout()
@@ -35,7 +35,7 @@ class CmsController extends AbstractController
     }
     
     /**
-     * @Route("/cms/category/{slug}/{page?1}",
+     * @Route("/modules/category/{slug}/{page?1}",
      *     name="cmsCategoryList",
      *     requirements={"slug"="^[A-Za-z0-9-]*$"},
      *     requirements={"page"="\d+"}
@@ -64,7 +64,7 @@ class CmsController extends AbstractController
         
         //vue temporaire en attendant pour tester l'ajout au panier
         return $this->render(
-            '@fo/cms/cmsPagesList.html.twig',
+            '@fo/modules/cmsPagesList.html.twig',
             [
             'cmsPages' => $pagerfanta,
             'category' => $category,

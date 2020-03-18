@@ -14,7 +14,7 @@ easy_admin:
         # TODO: create a css theme
         #assets:
             #css:
-                #- 'public/build/js/custom.css'
+                #- 'public/build/scripts/custom.css'
         #templates:
          #   edit: 'admin/custom_edit_form.html.twig'
 

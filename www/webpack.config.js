@@ -2,12 +2,15 @@ var Encore = require("@symfony/webpack-encore")
 const path = require("path")
 const fsr = require("fs").readFileSync
 const yml = require("js-yaml")
-const { parameters : { configs , poll, regenDist } } = yml.safeLoad(fsr("./config/pages.yml"), yml.JSON_SCHEMA)
+
+const {
+	parameters : {manifestKey , configs , poll, regenDist }
+} = yml.safeLoad(fsr("./config/pages.yml"), yml.JSON_SCHEMA)
+
 const EXCLUDE = ["/node_modules/", "/vendor/"]
-let isSingleEntry = false;
 
 // Config message
-console.info("Don't forget to add entries in config/pages.yaml\n")
+console.info("Don't forget to create pages necessary files,\n check config/pages.yaml\n")
 // end
 
 // set an config object used in all workspace (front-office / admin)
@@ -17,7 +20,7 @@ const aliases = function aliases(config, alias = null) {
 		aliasName = alias ? alias : name.slice(0, 2);
 
 	try {
-		configAliases[`@${aliasName}`] = path.resolve(__dirname,`assets/${name}/ts`)
+		configAliases[`@${aliasName}`] = path.resolve(__dirname,`assets/${name}/scripts`)
 		configAliases[`#${aliasName}`] =  path.resolve(__dirname, `assets/${name}/scss`)
 		configAliases['@core'] = path.resolve(__dirname, `assets/core/ts`)
 		configAliases['#core'] = path.resolve(__dirname, `assets/core/scss`)
@@ -28,49 +31,39 @@ const aliases = function aliases(config, alias = null) {
 	return {
 		// add to all workspaces
 		...config.resolve.alias, ...configAliases,
-		...config.resolve.extensions.push(".scss"),
+		...config.resolve.extensions.push(".scss",".ts")
 	}
 }
 
 const getWorkspaces = function getWorkspaces(entry = null) {
 
 	let workspaces = []
-	isSingleEntry = isSingleEntry || Boolean(entry)
 
 	for (const name in configs) {
-
-		const defaultExt = configs[name].defaultExt;
-		const typescriptEnable = defaultExt === "ts"
-		const pages = configs[name].pages;
-		const alias = configs[name].alias;
-		const buildPath = configs[name].build ? configs[name].build :`/${name}/build`;
+		const { build, pages, alias, sharedEntry } = configs[name]
+		const buildPath = build ? '/'+build :`/${name}/build`;
 
 		if (typeof entry === "string") {
 			Encore.addEntry(entry, path.resolve(__dirname, `assets/${name}/${entry}`))
 		} else {
-			console.info(`---------\nWorkspace : ${name}\n`)
-
-			if (!isSingleEntry) {
-				Encore.cleanupOutputBeforeBuild()
-			}
-
-			pages.forEach(function(page) {
-				if (typeof page === "string") {
-					console.info(` - ${page}\r`)
-					Encore.addEntry(`${page}`, path.resolve(__dirname, `assets/${name}/${page}`))
+				pages ? pages.forEach(function(entry) {
+				if (typeof entry === "string") {
+					Encore.addEntry(entry, path.resolve(__dirname, `assets/${name}/${entry}`))
 				} else {
 					throw new Error("There is a syntax error in config/pages.yaml\n")
 				}
-			})
+			}): null;
 		}
 
 		Encore
 
-			.setOutputPath(`public/${buildPath}`)
+			.setOutputPath(`${manifestKey}/${buildPath}`)
 
-			.setPublicPath(`/${buildPath}`)
+			.setManifestKeyPrefix(manifestKey)
 
-			.disableSingleRuntimeChunk()
+			.setPublicPath(`${buildPath}`)
+
+			.enableSingleRuntimeChunk()
 
 			.enableBuildNotifications(!Encore.isProduction())
 
@@ -85,21 +78,16 @@ const getWorkspaces = function getWorkspaces(entry = null) {
 			})
 
 			.enablePostCssLoader()
+
+			.cleanupOutputBeforeBuild([])
+
+			.splitEntryChunks()
+
+			.configureLoaderRule('javascript', loader => {
+				loader.test = /.(j|t)sx?$/;
+			})
+
 		;
-
-		if (typescriptEnable) {
-			Encore.enableTypeScriptLoader()
-
-			Encore.configureBabel(config => {
-				config.presets = [];
-			})
-		} else {
-			Encore.configureBabel(config => {
-				config.presets = [["@babel/preset-env", {
-					"useBuiltIns": false
-				}]];
-			})
-		}
 
 		let config = Encore.getWebpackConfig()
 
@@ -129,4 +117,7 @@ const getWorkspaces = function getWorkspaces(entry = null) {
 	return workspaces
 };
 
-module.exports = getWorkspaces();
+module.exports = (env, args) => {
+	console.log(args)
+	return getWorkspaces(args.entry);
+};

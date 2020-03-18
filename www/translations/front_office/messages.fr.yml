@@ -9,6 +9,7 @@ Previous: Précédent
 Next: Suivant
 ConfirmRegister: 'Valider votre addresse mail pour finir votre inscription'
 ConfirmFinishedRegister: 'Vous êtes bien inscrit sur Ecoservice'
+seeMore: Voir plus
 
 accounting.register_warning: Inscrivez vous pour commander
 diy.info.title: Liste DIY
@@ -23,3 +24,5 @@ allDiy: Toutes les Diys
 allProducts: Toutes les produits
 
 error.not_blank: Ce champs doit être rempli
+'Username could not be found.': Utilisateur introuvable
+'Invalid credentials.': Erreur d'identification

@@ -1,0 +1,17 @@
+{% extends 'front_office/layout.html.twig' %}
+
+{% block main %}
+    <div class="top-page">
+        {% include "@fo/partials/category-header.html.twig" with {
+            'name': cmsPage.name ,
+            'description': cmsPage.description,
+            'image':
+            { raw: cmsPage.image, obj: cmsPage
+        } } %}
+    </div>
+
+    {% if layout|default(false) and cmsPage|default(false) %}
+        {% include 'front_office/modules/layouts/' ~ layout ~ '.html.twig' with {'cmsPage': cmsPage } %}
+    {% endif %}
+
+{% endblock %}

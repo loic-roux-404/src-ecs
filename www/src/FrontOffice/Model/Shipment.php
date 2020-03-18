@@ -14,7 +14,7 @@ class Shipment
     protected $transporter;
 
     /**
-     * Set the shipping address.
+     * Set the shopping address.
      *
      * @param mixed $address
      */
@@ -24,7 +24,7 @@ class Shipment
     }
 
     /**
-     * Get the shipping address.
+     * Get the shopping address.
      *
      * @return mixed
      */

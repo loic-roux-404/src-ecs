@@ -144,17 +144,17 @@ class Basket implements \Countable
 
     /*    public function addShippingMethod($shippingMethod)
     {
-        $this->session->set('shipping', $shippingMethod);
+        $this->session->set('shopping', $shippingMethod);
     }*/
 
     /*    public function getShippingFee(): float
     {
-        return $this->session->get('shipping')->getFee();
+        return $this->session->get('shopping')->getFee();
     }
 
     public function getShippingMethod(): object
     {
-        $id = $this->session->get('shipping')->getId();
+        $id = $this->session->get('shopping')->getId();
         return $this->objectManager
             ->getRepository(ShippingMethod::class)
             ->find($id);

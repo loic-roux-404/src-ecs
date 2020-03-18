@@ -48,7 +48,7 @@ typings/
 .env
 .env.test
 
-# Nuxt.js build / generate output
+# Nuxt.scripts build / generate output
 .nuxt
 dist
 

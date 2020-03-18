@@ -9,17 +9,20 @@ table.datagrid {
 .datagrid thead {
   background: var(--form-bg);
 }
-.datagrid thead th {
+.datagrid thead th,
+.datagrid tfoot th{
   border: 0;
   padding: 5px;
 }
-.datagrid thead th a {
+.datagrid thead th a,
+.datagrid tfoot th a{
   text-transform: uppercase;
   font-size: smaller;
   font-weight: 500;
   color: $white;
 }
-.datagrid thead tr {
+.datagrid thead tr,
+.datagrid tfoot tr{
   background-color: $red-backoffice;
 }
 .datagrid tbody tr:nth-child(odd) {

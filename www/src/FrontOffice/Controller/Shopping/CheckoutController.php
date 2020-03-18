@@ -76,7 +76,7 @@ class CheckoutController extends AbstractController
     
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("checkout/shipping", name="checkoutShipping")
+     * @Route("checkout/shopping", name="checkoutShipping")
      */
     public function shipping()//Request $req)
     {
@@ -93,12 +93,12 @@ class CheckoutController extends AbstractController
 
             $this->basket->addShippingMethod($shippingMethod);
 
-            $this->session->set('checkout/shipping', true);
+            $this->session->set('checkout/shopping', true);
 
             return $this->redirectToRoute('checkoutSummary');
         }
 
-        return $this->render('front_office/shopping/checkout/shipping.html.twig', [
+        return $this->render('front_office/shopping/checkout/shopping.html.twig', [
             'form' => $form->createView(),
         ]);*/
     }

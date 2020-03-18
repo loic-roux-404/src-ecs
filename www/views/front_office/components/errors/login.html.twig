@@ -1,0 +1,8 @@
+{% if error %}
+    {% dump(error) %}
+    <div class="form-group">
+        <div class="alert alert-danger text-center" role="alert">
+            {{ error.messageKey|trans|raw }} {{ error.username ? ': ' ~ error.username : '' }}
+        </div>
+    </div>
+{% endif %}

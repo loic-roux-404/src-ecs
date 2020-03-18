@@ -1,14 +1,14 @@
 twig:
-    default_path: '%front_end.default_path%'
+    default_path: '%kernel.project_dir%/views'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
         website_name: '%website_name%'
         easydmin_asset_config: 'admin'
-        easydmin_asset_entry: 'js/app'
+        easydmin_asset_entry: 'scripts/app'
         default_img: 'static/empty.png'
     paths:
-        'templates': '%front_end.default_path%'
+        '%kernel.project_dir%/views': 'views'
         '%front_end.admin%': 'admin'
         '%front_end.fo%': 'fo'
     # TODO: mettre en place les form_themes https://symfony.com/doc/current/form/form_themes.html
@@ -17,7 +17,7 @@ twig:
 
 webpack_encore:
     # The path where Encore is building the assets.
-    # This should match Encore.setOutputPath() in webpack.config.js.
+    # This should match Encore.setOutputPath() in webpack.config.scripts.
     output_path: false
     builds:
         front_office: '%front_end.fo_build%'
