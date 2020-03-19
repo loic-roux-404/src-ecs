@@ -1,7 +1,7 @@
 @import '#core/bootstrap-form';
 @import '../../base';
 
-.panier_title{
+.panier_title {
   margin-left: 32px;
   margin-bottom: 32px;
   font-size: 2.5rem;
@@ -11,18 +11,19 @@
   }
 }
 
-.basket-empty{
+.basket-empty {
   margin: 4rem 0;
-  p{
+
+  p {
     padding: 5rem;
   }
 }
 
-.empty{
+.empty {
   font-size: 1.2rem;
 }
 
-.continueWhite{
+.continueWhite {
   font-size: 1.2rem;
   margin: 8px 0;
   padding: 16px 16px;
@@ -43,77 +44,90 @@
   color: $darkGrey;
 }
 
-.mon_panier{
+.mon_panier {
   .total_pc {
     border-right: 1px solid;
   }
 
-  .panier{
-    svg{
+  .panier {
+    svg {
       width: 32px;
-      path{
+
+      path {
         fill: $darkGrey;
       }
     }
+
     @include centerBetween;
     @media screen and (max-width: 1550px) {
       @include fullCenter;
     }
   }
-  .total_mob{
-    .price{
+
+  .total_mob {
+    .price {
       text-align: right;
     }
+
     font-size: 1.2rem;
     text-align: left !important;
   }
+
   @media screen and (max-width: 1024px) {
-    .total_mob{
+    .total_mob {
       display: table-row;
     }
-    .total_pc{
+    .total_pc {
       display: none;
     }
   }
-  table{
+
+  table {
     margin: 0 0 0 128px;
     border: solid 1px $darkGrey;
     text-align: center;
-    thead{
+
+    thead {
       border-bottom: solid 1px $darkGrey;
-      th{
+
+      th {
         padding: 16px;
         @media screen and (max-width: 430px) {
           font-size: 0.9rem;
         }
       }
     }
-    tbody{
-      .table_img{
+
+    tbody {
+      .table_img {
         padding: 32px 128px;
         border: 0;
-        a{
+
+        a {
           img {
             max-width: 250px;
           }
-          h2{
+
+          h2 {
             margin-left: 16px;
           }
+
           @include centerAround;
-          @media screen and (max-width: 1550px){
-            h2{
+          @media screen and (max-width: 1550px) {
+            h2 {
               margin-left: 0;
               margin-bottom: 16px;
             }
             @include fullCenter;
-            h2{
+            h2 {
               order: 1;
             }
-            img{
+            img {
               order: 2;
             }
           }
         }
+
         @media screen and (max-width: 1200px) {
           padding: 32px 64px;
         }
@@ -139,7 +153,8 @@
           }
         }
       }
-      td{
+
+      td {
         vertical-align: middle;
         padding: 16px;
         @media screen and (max-width: 430px) {
@@ -148,8 +163,10 @@
         border: solid 1px $darkGrey;
 
       }
+
       font-size: 1.5rem;
     }
+
     @media screen and (max-width: 1700px) {
       margin: 0 0 0 64px;
     }
@@ -157,33 +174,43 @@
       margin: 0;
     }
   }
-  .recapPanier{
-    margin: 0 128px 0 0;
+
+  .recapPanier {
+    width: 250px;
+    margin: auto;
     padding: 32px 16px;
     background: $lightGrey;
-    h3{
+
+    h3 {
       font-size: 1.8rem;
     }
-    p{
+
+    p {
       font-size: 1.1rem;
     }
-    .sousTot{
+
+    .sousTot {
       padding: 32px 0 8px 0;
     }
-    .livraison{
+
+    .livraison {
       padding: 8px 0 16px 0;
     }
-    .total{
+
+    .total {
       padding: 24px 0;
     }
-    .price{
+
+    .price {
       font-size: 1rem;
     }
-    .continue a{
+
+    .continue a {
       padding: 16px 64px;
       color: white;
       background: $darkGreen;
     }
+
     @media screen and (max-width: 1700px) {
       margin: 0 64px 0 0;
     }
@@ -192,9 +219,10 @@
     }
   }
 
-  .button{
+  .button {
     margin: 32px 0 0 128px;
-    a{
+
+    a {
       font-size: 1.2rem;
       margin: 8px 0;
       padding: 16px 16px;
@@ -202,12 +230,14 @@
       text-align: center;
       border: 2px solid $darkGrey;
     }
+
     a:hover {
       background: $darkGreen;
       color: white;
       border: 2px $darkGrey solid;
       transition: .4s ease;
     }
+
     @media screen and (max-width: 1700px) {
       margin: 32px 0 0 64px;
     }
@@ -217,7 +247,7 @@
   }
 }
 
-.adress_choice{
+.adress_choice {
   font-size: 1.5rem;
   color: blue;
   @media screen and (max-width: 800px) {
@@ -226,27 +256,32 @@
   @media screen and (max-width: 500px) {
     font-size: 1rem;
   }
-  .address_button div{
+
+  .address_button div {
     margin: 32px auto;
     @media screen and (max-width: 1024px) {
       margin: 32px auto;
     }
     font-size: 1.2rem;
-    button{
+
+    button {
       font-size: 1.2rem;
     }
-    .continue{
+
+    .continue {
       color: white;
       padding: 16px 64px;
       background: $darkGreen;
     }
-    .add_address{
+
+    .add_address {
       padding: 16px 64px;
       @media screen and (max-width: 500px) {
         padding: 16px 32px;
       }
       border: 2px solid $darkGreen;
     }
+
     .add_address:hover {
       background: $darkGreen;
       color: white;
@@ -254,11 +289,13 @@
       transition: .4s ease;
     }
   }
-  .resetMargin{
+
+  .resetMargin {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-  .adress_border{
+
+  .adress_border {
     font-size: 1.5rem;
     @media screen and (max-width: 500px) {
       font-size: 1rem;
@@ -275,7 +312,8 @@
     }
     border: solid 1px $darkGrey;
     color: $darkGreen;
-    .adress_title{
+
+    .adress_title {
       margin: 0 64px;
       @media screen and (max-width: 1024px) {
         margin: 0 32px;
@@ -286,7 +324,8 @@
       padding: 32px 0;
       border-bottom: solid 1px $darkGrey;
     }
-    .adress_list{
+
+    .adress_list {
       margin: 0 128px;
       @media screen and (max-width: 1024px) {
         margin: 0 64px;
@@ -298,21 +337,26 @@
         margin: 0 16px;
       }
       padding: 16px 0;
-      .adress_item{
+
+      .adress_item {
         padding: 32px 0;
-        .form-check{
+
+        .form-check {
           margin: 32px;
           cursor: pointer;
         }
-        legend{
+
+        legend {
           display: none;
         }
-        input{
+
+        input {
           cursor: pointer;
           display: block;
           transform: scale(2);
         }
-        label{
+
+        label {
           cursor: pointer;
           margin-left: 16px;
         }
@@ -321,33 +365,37 @@
   }
 }
 
-.paiementPayp{
-  .continue a{
+.paiementPayp {
+  .continue a {
     padding: 16px 64px;
     color: white;
     background: $darkGreen;
   }
-  .marginPaypal{
+
+  .marginPaypal {
     margin-top: 128px;
   }
 }
 
-.listeCommande{
+.listeCommande {
   margin-top: 50px;
-  table{
+
+  table {
     border: solid 1px $darkGrey;
-    border-collapse:collapse;
-    th{
+    border-collapse: collapse;
+
+    th {
       padding: 32px;
       border-bottom: solid 1px $darkGrey;
-      border-right:1px solid $darkGrey;
-      border-left:1px solid $darkGrey;
+      border-right: 1px solid $darkGrey;
+      border-left: 1px solid $darkGrey;
     }
-    td{
+
+    td {
       padding: 32px;
       text-align: center;
-      border-right:1px solid $darkGrey;
-      border-left:1px solid $darkGrey;
+      border-right: 1px solid $darkGrey;
+      border-left: 1px solid $darkGrey;
       border-bottom: solid 1px $darkGrey;
     }
   }

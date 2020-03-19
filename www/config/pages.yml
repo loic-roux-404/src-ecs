@@ -1,11 +1,8 @@
-# enable with nfs/ disable with rsync
-#(false | true)
 parameters:
     manifestKey: 'public'
     poll: 200
-    regenDist: false # regenerate a webpack config dist
+    regenDist: false # regenerate a webpack config.dist.js used by IDE (if two config take only the first)
     configs:
-        # Add pages for the differents spaces here (correspond to webpack pages)
         front_office:
             build: front_office/build
             pages:
@@ -19,7 +16,7 @@ parameters:
             alias: admin
 
 # TODO : create a per page config which echo in app.js new pages if not exist
-    #- idea : command to update file in package.json
-    #- use directory name with module definition for specific
-    #- use JSON object structure to create a NodeTree organisation (pages)
-    #- Keep possibility of big main entries on top of tree
+#- idea : command to update file in package.json
+#- use directory name with module definition for specific
+#- use JSON object structure to create a NodeTree organisation (pages)
+#- Keep possibility of big main entries on top of tree

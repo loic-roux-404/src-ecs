@@ -11,7 +11,6 @@ import './pages/modules/pro'
 
 // ecommerce features
 import './pages/shopping/purchase-flow'
-
 import './pages/shopping/products'
 
 // Account management / log forms

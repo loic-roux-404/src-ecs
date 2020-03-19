@@ -344,7 +344,7 @@
 
         <div class="easyadmin-vich-image-actions">
             {# the container element is needed to allow customizing the <input type="file" /> #}
-            <div class="btn btn-secondary input-file-container">
+            <div class="button btn-secondary input-file-container">
                 <i class="fa fa-fw fa-upload"></i> {{ 'action.choose_file'|trans({}, 'EasyAdminBundle') }}
                 {{ form_widget(form.file, { 'attr': { 'onchange': file_upload_js }, vich: true}) }}
             </div>
@@ -372,7 +372,7 @@
     {% set _trans_parameters = { '%entity_name%':  easyadmin.entity.name|trans(domain = _translation_domain), '%entity_label%': easyadmin.entity.label|trans(domain = _translation_domain) } %}
 
     {# the 'save' action is hardcoded for the 'edit' and 'new' views #}
-    <button type="submit" class="btn btn-primary action-save">
+    <button type="submit" class="button btn-primary action-save">
         <span class="btn-label">{{ 'action.save'|trans(_trans_parameters, _translation_domain) }}</span>
     </button>
 
@@ -546,7 +546,7 @@
     {% set _trans_parameters = { '%entity_name%':  easyadmin.entity.name|trans(domain = _translation_domain), '%entity_label%': easyadmin.entity.label|trans(domain = _translation_domain) } %}
 
     {{ form_widget(form.ids) }}
-    <button type="button" class="btn btn-link deselect-batch-button">{{ 'action.deselect'|trans(_trans_parameters, _translation_domain) }}</button>
+    <button type="button" class="button btn-link deselect-batch-button">{{ 'action.deselect'|trans(_trans_parameters, _translation_domain) }}</button>
     {% for action in batch_actions %}
         <button type="submit" class="btn {{ action.css_class|default('btn-secondary') }} {% if action.ask_confirm %}batch-action-requires-confirmation{% endif %}" title="{{ action.title|default('') is empty ? '' : action.title|trans(_trans_parameters) }}" name="{{ form.name.vars.full_name }}" value="{{ action.name }}">
             {%- if action.icon %}<i class="fa fa-fw fa-{{ action.icon }}"></i> {% endif -%}

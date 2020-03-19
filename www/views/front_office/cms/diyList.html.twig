@@ -28,7 +28,7 @@
             </div>
         {% endfor %}
     </div>
-
-    {{ paginate(diys, 'diyList', 4)|raw }}
-
+    <div class="center">
+        {{ paginate(diys, 'diyList', 4)|raw }}
+    </div>
 {% endblock %}

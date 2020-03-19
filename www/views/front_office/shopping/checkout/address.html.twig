@@ -34,15 +34,15 @@
                 </div>
             </div>
             <div class="panier_space flexEnd address_button">
-                <div class="fullCenter button pop">
-                    <button type="submit" class="pop continue">{{ 'Continuer'|trans }}</button>
+                <div class="fullCenter pop">
+                    <button type="submit" class="button pop continue">{{ 'Continuer'|trans }}</button>
                 </div>
             </div>
         {{ form_errors(address_choice_form) }}
         {{ form_end(address_choice_form) }}
     {% endif %}
         <div class="panier_space flexStart address_button">
-            <div class="fullCenter button pop">
+            <div class="fullCenter pop">
                 <a class="continueWhite" href="{{ path('accountAddress') }}">+ Ajouter une adresse</a>
             </div>
         </div>

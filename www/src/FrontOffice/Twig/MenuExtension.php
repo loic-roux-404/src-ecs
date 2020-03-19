@@ -9,6 +9,7 @@ use Admin\Entity\Product;
 use Admin\Entity\ProductCategory;
 use Admin\Repository\NavRepository;
 use FrontOffice\Form\Accounting\LoginForm;
+use mysql_xdevapi\Exception;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Twig\Environment;
@@ -112,12 +113,19 @@ class MenuExtension extends AbstractExtension
     
     public function paginate($paginable, $route, $firstPageResults = null)
     {
+
+        if (is_array($route)) {
+            $routeSlug = $route['slug'];
+            $route = $route['name'];
+        }
+
         return $this->twig->render(
             'front_office/components/pagination.html.twig',
             [
-            'pag' => $paginable,
-            'route' => $route,
-            'firstPageResults' => $firstPageResults ?? 4
+               'paginable' => $paginable,
+               'route' => $route,
+               'slug' => $routeSlug ?? null,
+               'firstPageResults' => $firstPageResults ?? 4
             ]
         );
     }

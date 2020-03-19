@@ -12,7 +12,7 @@
     "admin:w": "yarn admin --watch",
     "lint": "eslint --ext .js,.ts --fix --cache=true assets/* ",
     "watch": "encore dev --watch",
-    "prod": "lint && encore production",
+    "prod": "encore production",
     "test": "jest --runInBand --no-cache",
     "test:w": "run test --watch"
   },

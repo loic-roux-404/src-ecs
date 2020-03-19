@@ -17,7 +17,7 @@
                     <article class="midWidth">
                         <h2 class="gel-sBold">{{ cmsPage.name}}</h2>
                         <p class="pop">{{ cmsPage.description|striptags|slice(0, 175)|raw  }}</p>
-                        <a class="btn pop" href="{{ path('cmsShow', { slug: cmsPage.slug }) }}">
+                        <a class="button pop" href="{{ path('cmsShow', { slug: cmsPage.slug }) }}">
                             {{ 'KnowMore'|trans|raw }}
                         </a>
                     </article>
@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="center">
-            <a class="btn pop" href="{{ path('productList') }}">Voir plus</a>
+            <a class="button pop" href="{{ path('productList') }}">Voir plus</a>
         </div>
     </section>
 
@@ -63,12 +63,12 @@
         <article class="fullCenter" id='pro'>
             <h4 class="pop-sBold">Professionnel</h4>
             <p class="pop">Découvrez nos solutions adaptées à votre entreprise.</p>
-            <a href="{{ path('proServiceList') }}" class="btn pop">En savoir plus</a>
+            <a href="{{ path('proServiceList') }}" class="button pop">En savoir plus</a>
         </article>
         <article class="fullCenter" id='parti'>
             <h4 class="pop-sBold">Particulier</h4>
             <p class="pop">Trouvez votre bonheur et offrez une seconde chance aux objets du quotidien.</p>
-            <a href="{{ path('productList') }}" class="btn pop">Découvrir</a>
+            <a href="{{ path('productList') }}" class="button pop">Découvrir</a>
         </article>
     </section>
 
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="center">
-            <a href="{{ path('diyList') }}" class="btn pop">Voir plus</a>
+            <a href="{{ path('diyList') }}" class="button pop">Voir plus</a>
         </div>
     </section>
 {% endblock %}
