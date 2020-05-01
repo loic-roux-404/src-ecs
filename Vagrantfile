@@ -27,18 +27,17 @@ web_dir          = "/data/#{conf['projectname']}/#{conf['web_path']}"
 # provision status
 IS_PROVISIONNING = ARGV[1] == '--provision' 
 PROVISIONNED     = File.exist? File.dirname(__FILE__) + "/.vagrant/machines/default/virtualbox/action_provision"
-
+# is os
+IS_UNIX          = Vagrant::Util::Platform.darwin? || Vagrant::Util::Platform.linux?
 # nfs config
-conf['nfs'] = Vagrant::Util::Platform.darwin? || Vagrant::Util::Platform.linux?
+conf['nfs'] = IS_UNIX
 NFS_ENABLED = !conf['nfs_force_disable'] && conf['nfs'] && !IS_PROVISIONNING  && PROVISIONNED
 
-hosts            = ""
-
 if !Vagrant.has_plugin?('vagrant-hostmanager')
-  puts "The vagrant-hostmanager plugin is required. Please install it with \"vagrant plugin install vagrant-hostmanager\""
-  exit
+  system("vagrant plugin install vagrant-hostmanager")
 end
 
+hosts            = ""
 hosts << conf['servername'] << " "
 
 Vagrant.require_version ">= 2.2.2"
@@ -81,8 +80,8 @@ Vagrant.configure(2) do |config|
   end
 
   if conf['smb'] && !debug & !NFS_ENABLED
-    config.vm.synced_folder ".", "/data/ecs", type: 'smb', smb_password: "vagrant", smb_username: "vagrant",
-    mount_options: ["username=vagrant","password=vagrant"]
+    config.vm.synced_folder ".", "/data/ecs", type: 'smb',
+    mount_options: ["vers=2.0"]
   end
 
   if !debug
@@ -97,6 +96,15 @@ Vagrant.configure(2) do |config|
   if debug
     config.vm.synced_folder "./#{playbook_name}/", "/data/#{playbook_name}/", type: "rsync"
   end
+
+  # add your ssh keys to clone private repos
+  ssh_path = "/home/vagrant/.ssh"
+  config.vm.provision :shell,
+    privileged: false,
+    inline: "echo '#{id_rsa_ssh_key}' > #{ssh_path}/id_rsa && chmod 600 #{ssh_path}/id_rsa"
+  config.vm.provision :shell,
+    privileged: false,
+    inline: "echo '#{id_rsa_ssh_key_pub}' > #{ssh_path}/authorized_keys && chmod 600 #{ssh_path}/authorized_keys"
 
   ## Install and configure software
   config.vm.provision "ansible_local" do |ansible|
@@ -115,8 +123,7 @@ Vagrant.configure(2) do |config|
   end
 
   if NFS_ENABLED && Vagrant::Util::Platform.darwin? && !Vagrant.has_plugin?('vagrant-bindfs')
-     puts "please run : vagrant plugin install vagrant-bindfs"
-     exit
+     system('vagrant plugin install vagrant-bindfs')
   end
 
   if NFS_ENABLED
@@ -137,8 +144,17 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  # fix ssh common issues
-  ssh_path = "/home/vagrant/.ssh"
-  config.vm.provision :shell, :inline => "echo '#{id_rsa_ssh_key}' > #{ssh_path}/id_rsa && chmod 600 #{ssh_path}/id_rsa"
-  config.vm.provision :shell, :inline => "echo '#{id_rsa_ssh_key_pub}' > #{ssh_path}/authorized_keys && chmod 600 #{ssh_path}/authorized_keys"
+  #if conf['ssl']
+    #config.trigger.after :up do |t|
+      #cert = "#{conf['servername']}.combined.pem"
+      #cert_path = "/etc/ssl/#{conf['servername']}/#{cert}"
+      #t.run = { "scp -P 22 vagrant@#{conf['servername']}:#{cert_file} docs/" }
+
+      #if IS_UNIX
+          #t.run = { inline: => "sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain docs/#{cert}" }
+      #else
+        #t.run = { inline: => "certutil -enterprise -f -v -AddStore 'Root' 'certificates/ca/ca.crt'" }
+      #end
+    #end
+  #end
 end
